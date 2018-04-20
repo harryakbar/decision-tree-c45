@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+from tree import *
 from c45 import *
 
 def classify(dframe):
@@ -60,12 +61,17 @@ def fixDf(dframe):
 
 if __name__ == '__main__':
     df = pd.read_csv('movies.csv')
-    df = classify(df)
+    df = classify(df).sample(n=100)
     df = fixDf(df)
     ls = df.to_dict('list')
     
-    print(ls.keys())
+    # col = max([(k, gain(ls, k, 'popularity')) for k in ls.keys() if k != 'popularity'], key=lambda x: x[1])[0]
     # for i in ls.keys():
-    #     if i != 'popularity_category':
-    #         print("{0} : {1}".format(i, gain(ls,i,'popularity_category')))
-    print(df['popularity'])
+    #     if i != 'popularity':
+    #         print("{0} : {1}".format(i, gain(ls,i,'popularity')))
+    # print(ls.keys())
+    # print(col)
+    # print(df['popularity'])
+    # x = get_subtables(ls,'popularity')
+    # print(len(x))
+    x = c45_tree(ls,'popularity')
