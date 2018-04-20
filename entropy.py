@@ -30,7 +30,6 @@ def infox(table, col, res_col):
     return s
     
 
-
 def gain(table, x, res_col):
     """ The criterion for selecting attributes for splitting.
     """

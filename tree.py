@@ -15,3 +15,8 @@ class node(object):
 
     def __repr__(self):
         return '<tree node representation>'
+
+root = node("1")
+root.add_child(node("2"))
+root.add_child(node("3"))
+print(root)

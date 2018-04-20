@@ -3,7 +3,7 @@ import math
 
 freq_value  = {}
 data = {}
-target_attr = 'play'x
+target_attr = 'play'
 
 data_entropy = 0
 
