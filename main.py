@@ -57,11 +57,61 @@ def fixDf(dframe):
 
     dframe['production_companies'] = ls
 
+    ls = []
+    mean = dframe['vote_average'].mean()
+    for i in dframe['vote_average']:
+        if i >= mean:
+            ls.append("%s>" % (mean))
+        else:
+            ls.append("%s<" % (mean))
+    
+    dframe['vote_average'] = ls
+
+    ls = []
+    mean = dframe['runtime'].mean()
+    for i in dframe['runtime']:
+        if i >= mean:
+            ls.append("%s>" % (mean))
+        else:
+            ls.append("%s<" % (mean))
+
+    dframe['runtime'] = ls
+
+    ls = []
+    mean = dframe['vote_count'].mean()
+    for i in dframe['vote_count']:
+        if i >= mean:
+            ls.append("%s>" % (mean))
+        else:
+            ls.append("%s<" % (mean))
+
+    dframe['vote_count'] = ls
+
+    ls = []
+    mean = dframe['revenue'].mean()
+    for i in dframe['revenue']:
+        if i >= mean:
+            ls.append("%s>" % (mean))
+        else:
+            ls.append("%s<" % (mean))
+
+    dframe['revenue'] = ls
+
+    ls = []
+    mean = dframe['budget'].mean()
+    for i in dframe['budget']:
+        if i >= mean:
+            ls.append("%s>" % (mean))
+        else:
+            ls.append("%s<" % (mean))
+
+    dframe['budget'] = ls
+
     return dframe
 
 if __name__ == '__main__':
     df = pd.read_csv('movies.csv')
-    df = classify(df).sample(n=100)
+    df = classify(df).head(n=10)
     df = fixDf(df)
     ls = df.to_dict('list')
     
@@ -75,3 +125,6 @@ if __name__ == '__main__':
     # x = get_subtables(ls,'popularity')
     # print(len(x))
     x = c45_tree(ls,'popularity')
+    print(x)
+    # print(ls.keys())
+    # print(df['runtime'])
