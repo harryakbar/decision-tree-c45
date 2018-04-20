@@ -3,7 +3,7 @@ import math
 
 freq_value  = {}
 data = {}
-target_attr = 'play'
+target_attr = 'play'x
 
 data_entropy = 0
 
@@ -21,4 +21,10 @@ for freq in freq_value.values():
     data_entropy += (-freq/len(data)) * math.log(freq/len(data), 2)
 
 
-    
+def remainder(self, parameter_list):
+    s = 0 # sum
+    for v in utils.deldup(table[res_col]):
+        p = freq(table, res_col, v) / float(len(table[res_col]))
+        s += p * math.log(p, 2)
+    return -s
+print(data_entropy)
