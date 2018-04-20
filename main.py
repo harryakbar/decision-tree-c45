@@ -118,15 +118,6 @@ def listUrutan(table, target):
     sorted_dic = sorted(dic.items(), key=lambda x: (-x[1], x[0]))
     return sorted_dic
 
-# def test_data(tree, data_input):
-#     for t in tree:
-#         if (data_input[0] == t):
-#             if (len(tree[t]) > 1 and type(tree[t]) != str):
-#                 data_input = data_input[1:]
-#                 test_data(tree[t], data_input)
-#             else:
-#                 print(tree[t])
-
 def test_data(tree, data_input):
     for t in tree:
         if (t in data_input):
@@ -141,10 +132,9 @@ if __name__ == '__main__':
     df = classify(df).head(n=100)
     df = fixDf(df)
     ls = df.to_dict('list')
-    
     dct = listUrutan(ls,'popularity')
     data_input = ["production_companies=Columbia Pictures","runtime=127.4<", "genres=Action", "revenue=661092697.61<"]
     x = c45_tree(ls,'popularity')
     test_data(x, data_input)
     res = json.dumps(x, sort_keys=False, indent=4, separators=(',', ': '))
-    print(res)
+    # print(res)

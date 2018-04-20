@@ -2,15 +2,15 @@ from collections import OrderedDict
 
 
 def deldup(li):
-    """ Deletes duplicates from list _li_
-        and return new list with unique values.
+    """ Menghapus duplikasi dari list li 
+        dan mengembalikan list baru dengan nilai yang unik
     """
     return list(OrderedDict.fromkeys(li))
 
 
 def is_mono(t):
-    """ Returns True if all values of _t_ are equal
-        and False otherwise.
+    """ Mengembalikan nilai True jika semua nilai t sama,
+        selain itu mengembalikan False
     """
     for i in t:
         if i != t[0]:
@@ -19,8 +19,8 @@ def is_mono(t):
 
 
 def get_indexes(table, col, v):
-    """ Returns indexes of values _v_ in column _col_
-        of _table_.
+    """ Mengembalikan index dari value v di kolom col
+        pada table
     """
     li = []
     start = 0
@@ -33,37 +33,15 @@ def get_indexes(table, col, v):
 
 
 def get_values(t, col, indexes):
-    """ Returns values of _indexes_ in column _col_
-        of the table _t_.
-    """
+    """ Mengembalikan nilai pada index di kolom col pada tabel t """
     return [t[col][i] for i in range(len(t[col])) if i in indexes]
 
 
 def del_values(t, ind):
-    """ Creates the new table with values of _ind_.
-    """
+    """ Membuat table baru dengan nilai ind """
     return {k: [v[i] for i in range(len(v)) if i in ind] for k, v in t.items()}
 
 
-def formalize_rules(list_rules):
-    """ Gives an list of rules where
-        facts are separeted by coma.
-        Returns string with rules in
-        convinient form (such as
-        'If' and 'Then' words, etc.).
-    """
-    text = ''
-    for r in list_rules:
-        t = [i for i in r.split(',') if i]
-        text += 'If %s,\n' % t[0]
-        for i in t[1:-1]:
-            text += '   %s,\n' % i
-        text += 'Then: %s.\n' % t[-1]
-    return text
-
-
 def get_subtables(t, col):
-    """ Returns subtables of the table _t_
-        divided by values of the column _col_.
-    """
+    """ Mengembalikan subtable dari tabel t yang dibagi oleh nilai pada kolom col """
     return [del_values(t, get_indexes(t, col, v)) for v in deldup(t[col])]

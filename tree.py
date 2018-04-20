@@ -10,8 +10,7 @@ def c45_tree(table, target):
         for t in subtable:
             v = t[col][0]
             if is_mono(t[target]):
-                tree[('%s=%s' % (col, v))] = ('%s=%s' % (target, t[target][0]))   
-                # tree.append(['%s=%s' % (col, v), '%s=%s' % (target, t[target][0])])
+                tree[('%s=%s' % (col, v))] = ('%s=%s' % (target, t[target][0]))
             else:
                 del t[col]
                 tree[('%s=%s' % (col, v))] = c45_tree(t, target)
