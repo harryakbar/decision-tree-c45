@@ -2,7 +2,7 @@ from utils import *
 from c45 import *
 
 def c45_tree(table, target):
-    if len(table)!= 1:
+    if len(table) > 1:
         col = max([(k, gain(table, k, target)) for k in table.keys() if k != target],
                 key=lambda x: x[1])[0]
         tree = {}
@@ -17,4 +17,3 @@ def c45_tree(table, target):
         return tree
     else:
         return []
-

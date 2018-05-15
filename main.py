@@ -125,16 +125,50 @@ def test_data(tree, data_input):
                 data_input = data_input[1:]
                 test_data(tree[t], data_input)
             else:
-                print(tree[t])
+                return tree[t]
+
+def accuracy(target, result):
+    count = 0
+    for t in range(len(target)):
+        if (target[t] == result[t]):
+            count += 1
+    return count/len(target)
+    df = fixDf(df)
 
 if __name__ == '__main__':
     df = pd.read_csv('movies.csv')
-    df = classify(df).head(n=100)
-    df = fixDf(df)
+    size = 1000
+    df = classify(df).head(n=size)
     ls = df.to_dict('list')
+    # print(ls)
     dct = listUrutan(ls,'popularity')
-    data_input = ["production_companies=Columbia Pictures","runtime=127.4<", "genres=Action", "revenue=661092697.61<"]
+    new_table = []
+    count = 0
+    for i in range(size):
+        new_table.append([])
+
+    for l in ls:
+        for j in ls[l]:
+            new_table[count].append("{}={}".format(l,j))
+            count += 1
+        count = 0
     x = c45_tree(ls,'popularity')
-    test_data(x, data_input)
+    target = ls["popularity"]
+
+    arrtemp = []
+    for i in new_table:
+        # test_data(x, i)
+        if test_data(x, i):
+            # a = str(test_data(x, i)[11:])
+            # print(a)
+            arrtemp.append(test_data(x, i)[11:])
+        else:
+            # a = str(test_data(x, i))
+            # print(a)
+            arrtemp.append(test_data(x, i))
+    print(target)
+    print("=====")
+    print(arrtemp)
+    print(accuracy(target, arrtemp))
     res = json.dumps(x, sort_keys=False, indent=4, separators=(',', ': '))
     # print(res)
